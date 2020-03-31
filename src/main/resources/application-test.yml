@@ -1,0 +1,59 @@
+logging:
+  level:
+    com.kaituo.comparison.back: info
+server:
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+    min-response-size: 1024
+  port: 1005
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@192.168.110.201:1521:icprod
+    username: icprod2
+    password: root123
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    hikari:
+      max-lifetime: 60000
+      maximum-pool-size: 15
+  aop:
+    proxy-target-class: true
+    auto: true
+
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.kaituo.comparison.back.core.entity.*
+  global-config:
+    #数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: UUID
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: NOT_NULL
+      #驼峰下划线转换
+      column-underline: true
+      #db-type: mysql
+    banner: false
+  #原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+
+hk:
+  host: 192.168.110.202:443
+  appKey: 29584542
+  appSecret: QiLH9PsxKqHd2jTT9y9d
+
+xh:
+  token: c26aaf2a5bd4a3c495cbf1a1290a0b57
+  commitResult: http://192.168.110.132:8080/zhsq/front/anon/doorAccessSync.json
+  doorDeviceList: http://192.168.110.132:8080/zhsq/front/anon/doorDeviceList.json
+  doorAccessListAuth: http://192.168.110.132:8080/zhsq/front/anon/doorAccessList.json?synctag=1&status=1
+  doorAccessListWait: http://192.168.110.132:8080/zhsq/front/anon/doorAccessList.json?synctag=4&status=1
+  doorAccessListFail: http://192.168.110.132:8080/zhsq/front/anon/doorAccessList.json?synctag=3&status=1
